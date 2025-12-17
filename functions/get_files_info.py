@@ -2,9 +2,14 @@ import os
 
 def get_files_info(working_directory, directory="."):
     try:
+        # turn working directory into absolute path
         working_dir_abs = os.path.abspath(working_directory)    
+        # build the full path
         target_dir = os.path.normpath(os.path.join(working_dir_abs, directory))
+        # check the target dir is in inside working directory abs
         valid_target = os.path.commonpath([working_dir_abs,target_dir]) ==  working_dir_abs
+
+
         if not valid_target:
             return f'Error: Cannot list "{directory}" as it is outside the permitted working directory' 
         if not os.path.isdir(target_dir):
@@ -25,7 +30,7 @@ def get_files_info(working_directory, directory="."):
 
     except Exception as e:
         return f"Error: {e}"
-        
+
 
 
 
